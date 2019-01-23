@@ -91,6 +91,7 @@ function push_initialiseState() {
 }
 
 function push_sendSubscriptionToServer(subscription, action) {
+  console.warn('push_sendSubscriptionToServer');
     var req = new XMLHttpRequest();
   /* var url = Routing.generate('pjm_app_api_pushsubscription_' + action);*/
     var url = 'https://192.168.0.103/~manisha/magentom230/push/2.php';
@@ -98,13 +99,17 @@ function push_sendSubscriptionToServer(subscription, action) {
     req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     req.setRequestHeader("Content-type", "application/json");
     req.onreadystatechange = function (e) {
+      console.warn('onreadystatechange');
         if (req.readyState == 4) {
+          console.warn('readyState');
             if(req.status != 200) {
+                console.warn('!= 200');
                 console.error("[SW] Erreur :" + e.target.status);
             }
         }
     };
     req.onerror = function (e) {
+       console.warn('onerror');
         console.error("[SW] Erreur :" + e.target.status);
     };
 
