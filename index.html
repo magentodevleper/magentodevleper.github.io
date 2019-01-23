@@ -67,7 +67,7 @@ function push_initialiseState() {
            console.warn('disabled');
             if (!subscription) {
                 console.warn('not subscription');
-              /*  push_sendSubscriptionToServer(subscription, 'update');*/
+               push_sendSubscriptionToServer(subscription, 'update');
                 // We aren't subscribed to push, so set UI
                 // to allow the user to enable push
                return;
