@@ -241,16 +241,16 @@ self.addEventListener('push', function(event) {
                          var notificationTag = data.tag;
                          var url = data.url;
  
-                         /*return self.registration.showNotification(title, {
+                         return self.registration.showNotification(title, {
                               body: text,
                               icon: icon,
                               tag: notificationTag,
                               data: {
                                    url : url
                               }
-                         });*/
+                         });
                         
-                           event.waitUntil(
+                          /* event.waitUntil(
                                self.registration.showNotification(title, {
                                  body: text,
                                  icon: icon,
@@ -259,7 +259,7 @@ self.addEventListener('push', function(event) {
                                    url : url
                                   }
                                })
-                             );       
+                             );       */
 
                         
                         
