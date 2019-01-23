@@ -7,6 +7,7 @@
         "type": "image/png"
       }],
   "start_url": "https://magentodevleper.github.io",
+  "tag" : "Manisha",
   "display": "standalone",
   "gcm_sender_id": "123"
 }
