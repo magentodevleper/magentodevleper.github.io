@@ -262,6 +262,7 @@ self.addEventListener('push', function(event) {
                                 
                                //new Notification('');
                            } catch (e) {
+                                 console.error('Notification');
                                console.error(e);
                                if (e.name === 'TypeError') {
                                    return false;
