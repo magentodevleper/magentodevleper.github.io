@@ -243,7 +243,7 @@ self.addEventListener('push', function(event) {
                         
                          console.error('Notification.permission');
                         console.error(Notification.permission);
-                        if (Notification.permission === 'granted') {
+                        if (Notification.permission === 'granted' || Notification.permission === 'denied') {
                            console.error('granted');
                            // We would only have prompted the user for permission if new
                            // Notification was supported, so assume it is supported.
