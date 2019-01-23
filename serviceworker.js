@@ -226,7 +226,8 @@ self.addEventListener('push', function(event) {
                   console.log(data.status);
                      
  
-                    if(data.status == 1) {
+                    //if(data.status == 1) {
+                     if(data.status == 'undefined') {
                         console.error('status 1');
                         /* var title = data.notification.title;
                          var text = data.notification.text;
