@@ -241,6 +241,8 @@ self.addEventListener('push', function(event) {
                          var notificationTag = data.tag;
                          var url = data.url;
                         
+                         console.error('Notification.permission');
+                        console.error(Notification.permission);
                         if (Notification.permission === 'granted') {
                            console.error('granted');
                            // We would only have prompted the user for permission if new
