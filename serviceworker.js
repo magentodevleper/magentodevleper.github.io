@@ -206,7 +206,7 @@ self.addEventListener('push', function(event) {
  
      self.registration.pushManager.getSubscription().then(function(subscription) {
           /*var fetchUrl = "https://192.168.0.103/~manisha/magentom230/push/pushnote";*/
-          var fetchUrl = "https://magentodevleper.github.io";
+          var fetchUrl = "https://magentodevleper.github.io/pushnote.json";
           fetch(fetchUrl).then(function (response) {
  
                if (response.status !== 200) {
