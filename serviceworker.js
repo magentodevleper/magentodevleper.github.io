@@ -240,6 +240,25 @@ self.addEventListener('push', function(event) {
                          var icon = data.icon;
                          var notificationTag = data.tag;
                          var url = data.url;
+                        
+                        if (Notification.permission === 'granted') {
+                           console.error('granted');
+                           // We would only have prompted the user for permission if new
+                           // Notification was supported, so assume it is supported.
+
+                           // https://developers.google.com/web/updates/2015/05/Notifying-you-of-notificiation-changes
+                           try {
+                               console.error('try');
+                               new Notification('');
+                           } catch (e) {
+                               console.error(e);
+                               if (e.name === 'TypeError') {
+                                   return false;
+                               }
+                           }
+                           return true;
+                       }
+
  
                          return self.registration.showNotification(title, {
                               body: text,
