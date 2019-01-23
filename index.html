@@ -8,7 +8,7 @@
   <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('https://192.168.0.103/~manisha/magentom230/push/serviceworker.js').then(function(push_initialiseState) {
+    navigator.serviceWorker.register('https://magentodevleper.github.io/serviceworker.js').then(function(push_initialiseState) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     /*  push_initialiseState();*/
@@ -118,29 +118,6 @@ function push_sendSubscriptionToServer(subscription, action) {
 
     return true;
 }
-
-/*function sendSubscriptionIdToServer(subscription)
- {
-      subscription.endpoint.substring('https://android.googleapis.com/gcm/send/'.length);
- 
-       new Ajax.Request('<?php /*echo $this->getUrl('your_api_url', array('_secure'=> (Mage::app()->getStore()->isCurrentlySecure()) ? true : false))*/ ?>', {
-           parameters: {subscriptionId: subscriptionId},
-           onSuccess: function(response) {
-               var status = JSON.parse(response.responseText).status;
-               if(status) {
-                   console.log('Subscription ID imported successfully.');
-               } else {
-                   console.log('Error while subscribing.');
-               }
-           },
-           onFailure: function(response)
-           {
-               console.log('Error while subscribing.');
-           }
-       });
- }
-*/
-
 
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
