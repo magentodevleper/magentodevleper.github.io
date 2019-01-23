@@ -6,7 +6,7 @@
         "sizes": "192x192",
         "type": "image/png"
       }],
-  "start_url": "https://192.168.0.103/~manisha/magentom230",
+  "start_url": "/popup.html",
   "display": "standalone",
   "gcm_sender_id": "123"
 }
