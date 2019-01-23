@@ -223,11 +223,17 @@ self.addEventListener('push', function(event) {
  
                     if(data.status == 1) {
                         console.error('status 1');
-                         var title = data.notification.title;
+                        /* var title = data.notification.title;
                          var text = data.notification.text;
                          var icon = data.notification.icon;
                          var notificationTag = data.notification.tag;
-                         var url = data.notification.url;
+                         var url = data.notification.url;*/
+                        
+                         var title = data.title;
+                         var text = data.text;
+                         var icon = data.icon;
+                         var notificationTag = data.tag;
+                         var url = data.url;
  
                          return self.registration.showNotification(title, {
                               body: text,
@@ -243,25 +249,25 @@ self.addEventListener('push', function(event) {
                         /*console.log('data');
                         console.log(data.name);
                         console.error('status 1');*/
-                         var title = data.name;
+                         /*var title = data.name;
 
                          var text = data.short_name;
-                         var icon = data.icons;
+                         var icon = data.icons;*/
                         /* var notificationTag = data.notification.tag;*/
-                         var url = data.start_url;
+                         /*var url = data.start_url;
                          console.log(title);
                          console.log(text);
                          console.log(icon);
-                         console.log(url);
+                         console.log(url);*/
  
-                         return self.registration.showNotification(title, {
+                       /*  return self.registration.showNotification(title, {
                               body: text,
                               icon: icon,
                               tag: notificationTag,
                               data: {
                                    url : url
                               }
-                         });
+                         });*/
 
 
                        /* console.log('data.notification.title');
