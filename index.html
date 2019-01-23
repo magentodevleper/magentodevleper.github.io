@@ -1,7 +1,201 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title></title>
+  <link rel="manifest" href="pushnote.json">
+</head>
 <body>
-<h1>Hello World Demo</h1>
-<p>I'm hosted a demo page with GitHub Pages.</p>
+  <script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('https://192.168.0.103/~manisha/magentom230/push/serviceworker.js').then(function(push_initialiseState) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    /*  push_initialiseState();*/
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+function push_initialiseState() {
+    console.log('push_initialiseState');
+    // Are Notifications supported in the service worker?
+    if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+        console.warn('[SW] Les notifications ne sont pas supportées par ce navigateur.');
+        /*changePushButtonState('incompatible');*/
+        return;
+    }
+    else {
+        console.warn('showNotification');
+    }
+
+    // Check the current Notification permission.
+    // If its denied, it's a permanent block until the
+    // user changes the permission
+    if (Notification.permission === 'denied') {
+        console.warn('[SW] Les notifications ne sont pas autorisées par l\'utilisateur.');
+        /*changePushButtonState('disabled');*/
+        console.warn('denied');
+        return;
+    }
+    else {
+        console.warn('not denied');
+    }
+
+    // Check if push messaging is supported
+    if (!('PushManager' in window)) {
+        console.warn('[SW] Les messages Push ne sont pas supportés par ce navigateur.');
+       /* changePushButtonState('incompatible');*/
+       console.warn('incompatible');
+        return;
+    }
+    else{
+        console.warn('push messaging is supported');
+    }
+
+    // We need the service worker registration to check for a subscription
+    navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+        // Do we already have a push message subscription?
+        serviceWorkerRegistration.pushManager.getSubscription()
+        .then(function(subscription) {
+            // Enable any UI which subscribes / unsubscribes from
+            // push messages.
+           /* changePushButtonState('disabled');*/
+           console.warn('disabled');
+            if (!subscription) {
+                console.warn('not subscription');
+              /*  push_sendSubscriptionToServer(subscription, 'update');*/
+                // We aren't subscribed to push, so set UI
+                // to allow the user to enable push
+               return;
+            }
+            else {
+                console.warn('subscription');
+            }
+
+            // Keep your server in sync with the latest endpoint
+           /* push_sendSubscriptionToServer(subscription, 'update');*/
+
+            // Set your UI to show they have subscribed for push messages
+            /*changePushButtonState('enabled');*/
+           console.warn('enabled');
+        })
+        ['catch'](function(err) {
+            console.error('Hello');
+            console.warn('[SW] Erreur pendant getSubscription()', err);
+        });
+    });
+}
+
+function push_sendSubscriptionToServer(subscription, action) {
+    var req = new XMLHttpRequest();
+  /* var url = Routing.generate('pjm_app_api_pushsubscription_' + action);*/
+    var url = 'https://192.168.0.103/~manisha/magentom230/push/2.php';
+    req.open('POST', url, true);
+    req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    req.setRequestHeader("Content-type", "application/json");
+    req.onreadystatechange = function (e) {
+        if (req.readyState == 4) {
+            if(req.status != 200) {
+                console.error("[SW] Erreur :" + e.target.status);
+            }
+        }
+    };
+    req.onerror = function (e) {
+        console.error("[SW] Erreur :" + e.target.status);
+    };
+
+    var key = subscription.getKey('p256dh');
+    var token = subscription.getKey('auth');
+
+    req.send(JSON.stringify({
+        'endpoint': getEndpoint(subscription),
+        'key': key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : null,
+        'token': token ? btoa(String.fromCharCode.apply(null, new Uint8Array(token))) : null
+    }));
+
+    return true;
+}
+
+/*function sendSubscriptionIdToServer(subscription)
+ {
+      subscription.endpoint.substring('https://android.googleapis.com/gcm/send/'.length);
+ 
+       new Ajax.Request('<?php /*echo $this->getUrl('your_api_url', array('_secure'=> (Mage::app()->getStore()->isCurrentlySecure()) ? true : false))*/ ?>', {
+           parameters: {subscriptionId: subscriptionId},
+           onSuccess: function(response) {
+               var status = JSON.parse(response.responseText).status;
+               if(status) {
+                   console.log('Subscription ID imported successfully.');
+               } else {
+                   console.log('Error while subscribing.');
+               }
+           },
+           onFailure: function(response)
+           {
+               console.log('Error while subscribing.');
+           }
+       });
+ }
+*/
+
+
+var CACHE_NAME = 'my-site-cache-v1';
+var urlsToCache = [
+  '/',
+  '/styles/main.css',
+  '/script/main.js'
+];
+
+self.addEventListener('install', function(event) {
+    console.log('install');
+  // Perform install steps
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+self.addEventListener('fetch', function(event) {
+    console.log('fetch');
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
+            console.log('response');
+          return response;
+        }
+          console.log('response not');
+        return fetch(event.request);
+      }
+    )
+  );
+});
+
+self.addEventListener('activate', function(event) {
+console.log('activate');
+  var cacheWhitelist = ['pages-cache-v1', 'blog-posts-cache-v1'];
+
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
+</script>
+
 </body>
 </html>
