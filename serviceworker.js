@@ -251,7 +251,16 @@ self.addEventListener('push', function(event) {
                            // https://developers.google.com/web/updates/2015/05/Notifying-you-of-notificiation-changes
                            try {
                                console.error('try');
-                               new Notification('');
+                           return self.registration.showNotification(title, {
+                              body: text,
+                              icon: icon,
+                              tag: notificationTag,
+                              data: {
+                                   url : url
+                              }
+                         });
+                                
+                               //new Notification('');
                            } catch (e) {
                                console.error(e);
                                if (e.name === 'TypeError') {
@@ -262,14 +271,14 @@ self.addEventListener('push', function(event) {
                        }
 
  
-                         return self.registration.showNotification(title, {
+                        /* return self.registration.showNotification(title, {
                               body: text,
                               icon: icon,
                               tag: notificationTag,
                               data: {
                                    url : url
                               }
-                         });
+                         });*/
                         
                           /* event.waitUntil(
                                self.registration.showNotification(title, {
