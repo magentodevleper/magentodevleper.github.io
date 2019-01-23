@@ -252,10 +252,12 @@ self.addEventListener('push', function(event) {
                         
                            event.waitUntil(
                                self.registration.showNotification(title, {
-                                 body: body,
+                                 body: text,
                                  icon: icon,
-                                 tag: tag,
-                                 data: data
+                                 tag: notificationTag,
+                                 data: {
+                                   url : url
+                                  }
                                })
                              );       
 
