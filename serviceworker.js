@@ -216,10 +216,13 @@ self.addEventListener('push', function(event) {
  
                // Examine the text in the response
                return response.json().then(function (data) {
-                    /*if (data.error || !data.notification) {
+                    if (data.error || !data.notification) {
                          console.error('The API returned an error.', data.error);
                          throw new Error();
-                    }*/
+                    }
+                     console.log('data');
+                     console.log(data);
+                     
  
                     if(data.status == 1) {
                         console.error('status 1');
