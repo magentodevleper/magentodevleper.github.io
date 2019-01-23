@@ -8,7 +8,7 @@
   <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('https://magentodevleper.github.io/serviceworker.js').then(function(push_initialiseState) {
+    navigator.serviceWorker.register('https://magentodevleper.github.io/serviceworker.js').then(function(registration) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     /*  push_initialiseState();*/
