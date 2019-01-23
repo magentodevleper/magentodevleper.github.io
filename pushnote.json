@@ -6,7 +6,7 @@
         "sizes": "192x192",
         "type": "image/png"
       }],
-  "start_url": "/popup.html",
+  "start_url": "https://magentodevleper.github.io",
   "display": "standalone",
   "gcm_sender_id": "123"
 }
