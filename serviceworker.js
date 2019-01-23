@@ -222,6 +222,8 @@ self.addEventListener('push', function(event) {
                     }*/
                      console.log('data');
                      console.log(data);
+                   console.log('data status');
+                  console.log(data.status);
                      
  
                     if(data.status == 1) {
